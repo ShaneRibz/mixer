@@ -1,8 +1,5 @@
-import { EffectCode } from '../types';
+import type { EffectCode } from '../types';
 
-/**
- * A class for efficiently managing a set of effects using a bitset
- */
 export class EffectSet {
   private static readonly effectToIndex: Map<EffectCode, number> = new Map();
   private static readonly indexToEffect: Map<number, EffectCode> = new Map();
@@ -127,7 +124,6 @@ export class EffectSet {
    * Get the number of effects in the set
    */
   size(): number {
-    // Count the number of set bits using Brian Kernighan's algorithm
     let count = 0;
     let n = this.bits;
 

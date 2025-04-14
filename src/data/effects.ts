@@ -1,4 +1,4 @@
-import { EffectCode, EffectData } from '../types';
+import type { EffectCode, EffectData } from '../types';
 
 export const effects: Record<EffectCode, EffectData> = {
   Ca: {

@@ -1,11 +1,12 @@
-import { encodeMixState, decodeMixState } from '../src/utils/encoding';
-import { MixState } from '../src/types';
+import type { MixState } from '../src/types';
+
+import { decodeMixState, encodeMixState } from '../src/utils/encoding';
 
 describe('Mix State Encoding/Decoding', () => {
   test('should encode and decode correctly', () => {
     const state: MixState = {
       product: 'OG Kush',
-      substances: ['A', 'B', 'C'],
+      substances: ['Cuke', 'Flu Medicine', 'Gasoline'],
     };
 
     const encoded = encodeMixState(state);

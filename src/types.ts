@@ -35,22 +35,22 @@ export type EffectCode =
   | 'Zo';
 
 export type SubstanceCode =
-  | 'A'
-  | 'B'
-  | 'C'
-  | 'D'
-  | 'E'
-  | 'F'
-  | 'G'
-  | 'H'
-  | 'I'
-  | 'J'
-  | 'K'
-  | 'L'
-  | 'M'
-  | 'N'
-  | 'O'
-  | 'P';
+  | 'Cuke'
+  | 'Flu Medicine'
+  | 'Gasoline'
+  | 'Donut'
+  | 'Energy Drink'
+  | 'Mouth Wash'
+  | 'Motor Oil'
+  | 'Banana'
+  | 'Chili'
+  | 'Iodine'
+  | 'Paracetamol'
+  | 'Viagra'
+  | 'Horse Semen'
+  | 'Mega Bean'
+  | 'Addy'
+  | 'Battery';
 
 export type ProductType =
   | 'OG Kush'
@@ -82,7 +82,7 @@ export interface EffectData {
 }
 
 export interface SubstanceData {
-  name: string;
+  abbreviation: string;
   rank: RankCode;
   price: number;
   effect: EffectCode[];

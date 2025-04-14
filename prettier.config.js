@@ -1,4 +1,5 @@
 module.exports = {
+  plugins: ['@ianvs/prettier-plugin-sort-imports'],
   singleQuote: true,
   tabWidth: 2,
   useTabs: false,
@@ -10,4 +11,7 @@ module.exports = {
   arrowParens: 'always',
   proseWrap: 'preserve',
   endOfLine: 'auto',
+  importOrder: ['<TYPES>', '', '^../(.*)$', '^./(.*)$'],
+  importOrderParserPlugins: ['typescript'],
+  importOrderTypeScriptVersion: '5.0.0',
 };

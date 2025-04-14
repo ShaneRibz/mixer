@@ -1,8 +1,9 @@
-import { EffectCode, EffectRule, MixResult, ProductType, SubstanceCode } from '../types';
+import type { EffectCode, EffectRule, MixResult, ProductType, SubstanceCode } from '../types';
+
 import { effects } from '../data/effects';
 import { products } from '../data/products';
-import { substances } from '../data/substances';
 import { effectRulesBySubstance } from '../data/rules';
+import { substances } from '../data/substances';
 import { EffectSet } from './effectSet';
 
 const MAX_EFFECTS = 8;

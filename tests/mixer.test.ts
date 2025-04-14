@@ -2,7 +2,7 @@ import { mixSubstances } from '../src/core/mixer';
 
 describe('mixSubstances', () => {
   test('should calculate basic mix correctly', () => {
-    const result = mixSubstances('OG Kush', ['A']);
+    const result = mixSubstances('OG Kush', ['Cuke']);
     expect(result.effects).toContain('Ca');
     expect(result.effects).toContain('En');
     expect(result.cost).toBe(2);
@@ -12,7 +12,7 @@ describe('mixSubstances', () => {
   });
 
   test('should apply transformation rules correctly', () => {
-    const result = mixSubstances('OG Kush', ['B', 'A']);
+    const result = mixSubstances('OG Kush', ['Flu Medicine', 'Cuke']);
 
     expect(result.effects).toContain('Se');
     expect(result.effects).toContain('En');
@@ -21,7 +21,17 @@ describe('mixSubstances', () => {
   });
 
   test('should respect maximum effects limit', () => {
-    const result = mixSubstances('OG Kush', ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']);
+    const result = mixSubstances('OG Kush', [
+      'Cuke',
+      'Flu Medicine',
+      'Gasoline',
+      'Donut',
+      'Energy Drink',
+      'Mouth Wash',
+      'Motor Oil',
+      'Banana',
+      'Chili',
+    ]);
     expect(result.effects.length).toBeLessThanOrEqual(8);
   });
 });
@@ -35,10 +45,10 @@ describe('mixSubstances edge cases', () => {
 
   test('should handle invalid substances gracefully', () => {
     // @ts-ignore - Testing runtime behavior with invalid input
-    const result = mixSubstances('OG Kush', ['A', 'Z', 'B']);
+    const result = mixSubstances('OG Kush', ['Cuke', 'Z', 'Flu Medicine']);
 
-    // Should ignore invalid substance 'Z' but still process A and B
-    expect(result.effects).toContain('En'); // From A
-    expect(result.effects).toContain('Se'); // From B
+    // Should ignore invalid substance 'Z' but still process 'Cuke' and 'Flu Medicine'
+    expect(result.effects).toContain('En'); // From 'Cuke'
+    expect(result.effects).toContain('Se'); // From 'Flu Medicine'
   });
 });

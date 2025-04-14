@@ -11,10 +11,10 @@ npm install @schedule1-tools/mixer
 ## Usage
 
 ```typescript
-import { mixSubstances, encodeMixState, decodeMixState } from '@schedule1-tools/mixer';
+import { decodeMixState, encodeMixState, mixSubstances } from '@schedule1-tools/mixer';
 
 // Calculate a mix
-const result = mixSubstances('OG Kush', ['A', 'B', 'C']);
+const result = mixSubstances('OG Kush', ['Cuke', 'Flu Medicine', 'Gasoline']);
 console.log(result);
 /*
 {
@@ -29,7 +29,7 @@ console.log(result);
 // Encode a mix state for sharing
 const encoded = encodeMixState({
   product: 'OG Kush',
-  substances: ['A', 'B', 'C'],
+  substances: ['Cuke', 'Flu Medicine', 'Gasoline'],
 });
 console.log(encoded); // "T0cgS3VzaDpBQkM"
 
@@ -39,7 +39,7 @@ console.log(decoded);
 /*
 {
   product: 'OG Kush',
-  substances: ['A', 'B', 'C']
+  substances: [ 'Cuke', 'Flu Medicine', 'Gasoline' ]
 }
 */
 ```

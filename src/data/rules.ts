@@ -1,7 +1,7 @@
-import { EffectCode, EffectRule, SubstanceCode } from '../types';
+import type { EffectRule, SubstanceCode } from '../types';
 
 export const effectRulesBySubstance: Record<SubstanceCode, EffectRule[]> = {
-  A: [
+  Cuke: [
     { ifPresent: ['Eu'], ifNotPresent: ['La'], replace: { Eu: 'La' } },
     { ifPresent: ['Fo'], ifNotPresent: ['Cy'], replace: { Fo: 'Cy' } },
     { ifPresent: ['Gi'], ifNotPresent: ['Tp'], replace: { Gi: 'Tp' } },
@@ -10,7 +10,7 @@ export const effectRulesBySubstance: Record<SubstanceCode, EffectRule[]> = {
     { ifPresent: ['Sn'], ifNotPresent: ['Pa'], replace: { Sn: 'Pa' } },
     { ifPresent: ['To'], ifNotPresent: ['Eu'], replace: { To: 'Eu' } },
   ],
-  B: [
+  'Flu Medicine': [
     { ifPresent: ['At'], ifNotPresent: ['Mu'], replace: { At: 'Mu' } },
     { ifPresent: ['Ca'], ifNotPresent: ['Be'], replace: { Ca: 'Be' } },
     { ifPresent: ['Cy'], ifNotPresent: ['Fo'], replace: { Cy: 'Fo' } },
@@ -22,7 +22,7 @@ export const effectRulesBySubstance: Record<SubstanceCode, EffectRule[]> = {
     { ifPresent: ['Sh'], ifNotPresent: ['Pa'], replace: { Sh: 'Pa' } },
     { ifPresent: ['Tp'], ifNotPresent: ['Gi'], replace: { Tp: 'Gi' } },
   ],
-  C: [
+  Gasoline: [
     { ifPresent: ['Di'], ifNotPresent: ['Gl'], replace: { Di: 'Gl' } },
     { ifPresent: ['El'], ifNotPresent: ['Di'], replace: { El: 'Di' } },
     { ifPresent: ['En'], ifNotPresent: ['Eu'], replace: { En: 'Eu' } },
@@ -35,7 +35,7 @@ export const effectRulesBySubstance: Record<SubstanceCode, EffectRule[]> = {
     { ifPresent: ['Sh'], ifNotPresent: ['Fc'], replace: { Sh: 'Fc' } },
     { ifPresent: ['Sn'], ifNotPresent: ['Tt'], replace: { Sn: 'Tt' } },
   ],
-  D: [
+  Donut: [
     { ifPresent: ['Ag'], ifNotPresent: ['Sl'], replace: { Ag: 'Sl' } },
     { ifPresent: ['Ba'], ifNotPresent: ['Sn'], replace: { Ba: 'Sn' } },
     { ifPresent: ['Cd'], ifNotPresent: ['Ex'], replace: { Cd: 'Ex' } },
@@ -44,7 +44,7 @@ export const effectRulesBySubstance: Record<SubstanceCode, EffectRule[]> = {
     { ifPresent: ['Mu'], ifNotPresent: ['Ca'], replace: { Mu: 'Ca' } },
     { ifPresent: ['Sh'], ifNotPresent: ['En'], replace: { Sh: 'En' } },
   ],
-  E: [
+  'Energy Drink': [
     { ifPresent: ['Di'], ifNotPresent: ['El'], replace: { Di: 'El' } },
     { ifPresent: ['Eu'], ifNotPresent: ['En'], replace: { Eu: 'En' } },
     { ifPresent: ['Fc'], ifNotPresent: ['Sh'], replace: { Fc: 'Sh' } },
@@ -55,20 +55,20 @@ export const effectRulesBySubstance: Record<SubstanceCode, EffectRule[]> = {
     { ifPresent: ['Sp'], ifNotPresent: ['Eu'], replace: { Sp: 'Eu' } },
     { ifPresent: ['Tt'], ifNotPresent: ['Sn'], replace: { Tt: 'Sn' } },
   ],
-  F: [
+  'Mouth Wash': [
     { ifPresent: ['Ca'], ifNotPresent: ['Ag'], replace: { Ca: 'Ag' } },
     { ifPresent: ['Cd'], ifNotPresent: ['Sn'], replace: { Cd: 'Sn' } },
     { ifPresent: ['Ex'], ifNotPresent: ['Se'], replace: { Ex: 'Se' } },
     { ifPresent: ['Fc'], ifNotPresent: ['Je'], replace: { Fc: 'Je' } },
   ],
-  G: [
+  'Motor Oil': [
     { ifPresent: ['En'], ifNotPresent: ['Mu'], replace: { En: 'Mu' } },
     { ifPresent: ['Eu'], ifNotPresent: ['Se'], replace: { Eu: 'Se' } },
     { ifPresent: ['Fo'], ifNotPresent: ['To'], replace: { Fo: 'To' } },
     { ifPresent: ['Mu'], ifNotPresent: ['Sc'], replace: { Mu: 'Sc' } },
     { ifPresent: ['Pa'], ifNotPresent: ['Ag'], replace: { Pa: 'Ag' } },
   ],
-  H: [
+  Banana: [
     { ifPresent: ['Ca'], ifNotPresent: ['Sn'], replace: { Ca: 'Sn' } },
     { ifPresent: ['Cy'], ifNotPresent: ['En'], replace: { Cy: 'En' } },
     { ifPresent: ['Di'], ifNotPresent: ['Fc'], replace: { Di: 'Fc' } },
@@ -79,7 +79,7 @@ export const effectRulesBySubstance: Record<SubstanceCode, EffectRule[]> = {
     { ifPresent: ['Sm'], ifNotPresent: ['Ag'], replace: { Sm: 'Ag' } },
     { ifPresent: ['To'], ifNotPresent: ['Sm'], replace: { To: 'Sm' } },
   ],
-  I: [
+  Chili: [
     { ifPresent: ['Ag'], ifNotPresent: ['Tt'], replace: { Ag: 'Tt' } },
     { ifPresent: ['At'], ifNotPresent: ['Eu'], replace: { At: 'Eu' } },
     { ifPresent: ['La'], ifNotPresent: ['Lf'], replace: { La: 'Lf' } },
@@ -88,7 +88,7 @@ export const effectRulesBySubstance: Record<SubstanceCode, EffectRule[]> = {
     { ifPresent: ['Sn'], ifNotPresent: ['Be'], replace: { Sn: 'Be' } },
     { ifPresent: ['Tp'], ifNotPresent: ['Fc'], replace: { Tp: 'Fc' } },
   ],
-  J: [
+  Iodine: [
     { ifPresent: ['Ca'], ifNotPresent: ['Ba'], replace: { Ca: 'Ba' } },
     { ifPresent: ['Cd'], ifNotPresent: ['Gi'], replace: { Cd: 'Gi' } },
     { ifPresent: ['Eu'], ifNotPresent: ['Si'], replace: { Eu: 'Si' } },
@@ -96,7 +96,7 @@ export const effectRulesBySubstance: Record<SubstanceCode, EffectRule[]> = {
     { ifPresent: ['Re'], ifNotPresent: ['Tp'], replace: { Re: 'Tp' } },
     { ifPresent: ['To'], ifNotPresent: ['Sn'], replace: { To: 'Sn' } },
   ],
-  K: [
+  Paracetamol: [
     { ifPresent: ['Ca'], ifNotPresent: ['Sl'], replace: { Ca: 'Sl' } },
     { ifPresent: ['El'], ifNotPresent: ['At'], replace: { El: 'At' } },
     { ifPresent: ['En'], ifNotPresent: ['Pa'], replace: { En: 'Pa' } },
@@ -108,20 +108,20 @@ export const effectRulesBySubstance: Record<SubstanceCode, EffectRule[]> = {
     { ifPresent: ['Sp'], ifNotPresent: ['Be'], replace: { Sp: 'Be' } },
     { ifPresent: ['To'], ifNotPresent: ['Tt'], replace: { To: 'Tt' } },
   ],
-  L: [
+  Viagra: [
     { ifPresent: ['At'], ifNotPresent: ['Sn'], replace: { At: 'Sn' } },
     { ifPresent: ['Di'], ifNotPresent: ['To'], replace: { Di: 'To' } },
     { ifPresent: ['Eu'], ifNotPresent: ['Be'], replace: { Eu: 'Be' } },
     { ifPresent: ['La'], ifNotPresent: ['Ca'], replace: { La: 'Ca' } },
     { ifPresent: ['Sh'], ifNotPresent: ['Gi'], replace: { Sh: 'Gi' } },
   ],
-  M: [
+  'Horse Semen': [
     { ifPresent: ['Ag'], ifNotPresent: ['Ca'], replace: { Ag: 'Ca' } },
     { ifPresent: ['Gi'], ifNotPresent: ['Re'], replace: { Gi: 'Re' } },
     { ifPresent: ['Si'], ifNotPresent: ['En'], replace: { Si: 'En' } },
     { ifPresent: ['Tp'], ifNotPresent: ['El'], replace: { Tp: 'El' } },
   ],
-  N: [
+  'Mega Bean': [
     { ifPresent: ['At'], ifNotPresent: ['La'], replace: { At: 'La' } },
     { ifPresent: ['Ca'], ifNotPresent: ['Gl'], replace: { Ca: 'Gl' } },
     { ifPresent: ['En'], ifNotPresent: ['Cy'], replace: { En: 'Cy' } },
@@ -133,14 +133,14 @@ export const effectRulesBySubstance: Record<SubstanceCode, EffectRule[]> = {
     { ifPresent: ['Sn'], ifNotPresent: ['Ca'], replace: { Sn: 'Ca' } },
     { ifPresent: ['Tp'], ifNotPresent: ['En'], replace: { Tp: 'En' } },
   ],
-  O: [
+  Addy: [
     { ifPresent: ['Ex'], ifNotPresent: ['Eu'], replace: { Ex: 'Eu' } },
     { ifPresent: ['Fo'], ifNotPresent: ['En'], replace: { Fo: 'En' } },
     { ifPresent: ['Gl'], ifNotPresent: ['Re'], replace: { Gl: 'Re' } },
     { ifPresent: ['Lf'], ifNotPresent: ['El'], replace: { Lf: 'El' } },
     { ifPresent: ['Se'], ifNotPresent: ['Gi'], replace: { Se: 'Gi' } },
   ],
-  P: [
+  Battery: [
     { ifPresent: ['Cy'], ifNotPresent: ['Gl'], replace: { Cy: 'Gl' } },
     { ifPresent: ['El'], ifNotPresent: ['Eu'], replace: { El: 'Eu' } },
     { ifPresent: ['Eu'], ifNotPresent: ['Zo'], replace: { Eu: 'Zo' } },

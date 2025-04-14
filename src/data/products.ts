@@ -1,4 +1,4 @@
-import { EffectCode, ProductData, ProductType } from '../types';
+import type { ProductData, ProductType } from '../types';
 
 export const products: Record<ProductType, ProductData> = {
   'OG Kush': {
