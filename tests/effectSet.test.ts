@@ -1,4 +1,3 @@
-// tests/core/effectSet.test.ts
 import { EffectSet } from '../src/core/effectSet';
 
 describe('EffectSet', () => {

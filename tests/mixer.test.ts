@@ -3,31 +3,24 @@ import { mixSubstances } from '../src/core/mixer';
 describe('mixSubstances', () => {
   test('should calculate basic mix correctly', () => {
     const result = mixSubstances('OG Kush', ['A']);
-    expect(result.effects).toContain('Ca'); // Original effect
-    expect(result.effects).toContain('En'); // Added by substance A
+    expect(result.effects).toContain('Ca');
+    expect(result.effects).toContain('En');
     expect(result.cost).toBe(2);
-    expect(result.sellPrice).toBe(46); // Actual implementation returns 46
-
-    // Let's also verify the profit calculation
-    expect(result.profit).toBe(9); // 46 - 2 - 35 = 9
-    expect(result.profitMargin).toBeCloseTo(0.2, 2); // ~0.196
+    expect(result.sellPrice).toBe(46);
+    expect(result.profit).toBe(9);
+    expect(result.profitMargin).toBeCloseTo(0.2, 2);
   });
 
   test('should apply transformation rules correctly', () => {
-    // Test a specific rule: Substance A transforms Eu to La
     const result = mixSubstances('OG Kush', ['B', 'A']);
 
-    // B adds Se, A adds En
     expect(result.effects).toContain('Se');
     expect(result.effects).toContain('En');
-
-    // B transforms Ca to Be
     expect(result.effects).not.toContain('Ca');
     expect(result.effects).toContain('Be');
   });
 
   test('should respect maximum effects limit', () => {
-    // Add many substances
     const result = mixSubstances('OG Kush', ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']);
     expect(result.effects.length).toBeLessThanOrEqual(8);
   });
