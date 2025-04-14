@@ -1,0 +1,27 @@
+# Dependencies
+node_modules
+.pnpm-store
+
+# Build
+dist
+build
+lib
+
+# Coverage and logs
+coverage
+*.log
+
+# Environment and local config
+.env*
+.vscode
+.idea
+.DS_Store
+
+# Cache
+.npm
+.eslintcache
+
+# Lock files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml

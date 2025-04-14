@@ -1,0 +1,30 @@
+# Source control
+.git
+.gitignore
+
+# Development files
+test
+tests
+__tests__
+*.test.*
+*.spec.*
+.eslintrc*
+.prettier*
+.editorconfig
+.vscode
+.github
+
+# Build configs
+tsconfig.json
+rollup.config.js
+webpack.config.js
+
+# Docs and examples
+docs
+examples
+*.md
+!README.md
+
+# Misc
+.DS_Store
+coverage

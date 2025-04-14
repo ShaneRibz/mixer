@@ -1,0 +1,18 @@
+# Build and output
+dist
+build
+lib
+
+# Dependencies
+node_modules
+
+# Coverage and reports
+coverage
+
+# Package files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Misc
+.DS_Store

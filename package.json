@@ -1,0 +1,37 @@
+{
+  "name": "@schedule1-tools/mixer",
+  "version": "0.0.0",
+  "description": "A package for calculating substance mixes in Schedule 1",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "prepublishOnly": "pnpm run test && pnpm run build"
+  },
+  "keywords": [
+    "schedule1"
+  ],
+  "author": "Schedule1 Tools",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.14.1",
+    "prettier": "^3.5.3",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.3.2",
+    "typescript": "^5.8.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/schedule1-tools/mixer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/schedule1-tools/mixer/issues"
+  },
+  "homepage": "https://github.com/schedule1-tools/mixer#readme"
+}
