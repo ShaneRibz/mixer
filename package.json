@@ -11,7 +11,8 @@
     "build": "tsc",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "prepublishOnly": "pnpm run test && pnpm run build"
+    "prepublishOnly": "pnpm run test && pnpm run build",
+    "format": "prettier --write ."
   },
   "keywords": [
     "schedule1"

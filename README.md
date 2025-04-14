@@ -11,10 +11,10 @@ npm install @schedule1-tools/mixer
 ## Usage
 
 ```typescript
-import { mixSubstances, encodeMixState, decodeMixState } from "@schedule1-tools/mixer";
+import { mixSubstances, encodeMixState, decodeMixState } from '@schedule1-tools/mixer';
 
 // Calculate a mix
-const result = mixSubstances("OG Kush", ["A", "B", "C"]);
+const result = mixSubstances('OG Kush', ['A', 'B', 'C']);
 console.log(result);
 /*
 {
@@ -28,13 +28,13 @@ console.log(result);
 
 // Encode a mix state for sharing
 const encoded = encodeMixState({
-  product: "OG Kush",
-  substances: ["A", "B", "C"],
+  product: 'OG Kush',
+  substances: ['A', 'B', 'C'],
 });
 console.log(encoded); // "T0cgS3VzaDpBQkM"
 
 // Decode a mix state
-const decoded = decodeMixState("T0cgS3VzaDpBQkM");
+const decoded = decodeMixState('T0cgS3VzaDpBQkM');
 console.log(decoded);
 /*
 {
@@ -43,6 +43,7 @@ console.log(decoded);
 }
 */
 ```
+
 ## Exports
 
 The package also exports the following data objects:
