@@ -18,11 +18,11 @@ const result = mixSubstances('OG Kush', ['A', 'B', 'C']);
 console.log(result);
 /*
 {
-  effects: ['En', 'Se', 'To'],
+  effects: [ 'Be', 'Eu', 'Se', 'To' ],
   cost: 12,
-  sellPrice: 42,
-  profit: -5,
-  profitMargin: -0.119
+  sellPrice: 64,
+  profit: 17,
+  profitMargin: 0.27
 }
 */
 
