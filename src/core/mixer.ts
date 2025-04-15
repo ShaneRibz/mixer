@@ -18,9 +18,6 @@ export function mixSubstances(product: ProductType, substanceCodes: SubstanceCod
 
   const productInfo = products[product];
   const effectsSet = new EffectSet(productInfo.effects);
-  const processedEffects = new EffectSet();
-  const removedEffects = new EffectSet();
-
   let totalCost = 0;
 
   for (const code of substanceCodes) {
@@ -29,9 +26,45 @@ export function mixSubstances(product: ProductType, substanceCodes: SubstanceCod
 
     totalCost += substance.price;
 
-    applySubstanceRules(code, effectsSet, processedEffects, removedEffects);
+    const rules = effectRulesBySubstance[code];
+    if (rules && rules.length > 0) {
+      const initialEffects = effectsSet.clone();
+      const processedEffects = new EffectSet();
+      const removedEffects = new EffectSet();
+      const appliedRules = new Set<number>();
 
-    if (effectsSet.size() < MAX_EFFECTS) {
+      // Phase 1: Apply rules where conditions are met in the initial state
+      for (let i = 0; i < rules.length; i++) {
+        const rule = rules[i];
+
+        if (checkRulePreconditions(rule, initialEffects)) {
+          applyReplaceEffects(
+            rule.replace,
+            initialEffects,
+            effectsSet,
+            processedEffects,
+            removedEffects
+          );
+          appliedRules.add(i);
+        }
+      }
+
+      // Phase 2: Apply rules where conditions are met after phase 1
+      for (let i = 0; i < rules.length; i++) {
+        if (appliedRules.has(i)) continue;
+
+        const rule = rules[i];
+
+        if (meetsPhaseTwo(rule, initialEffects, effectsSet, removedEffects)) {
+          if (canApplyTransformation(rule.replace, effectsSet)) {
+            applyTransformations(rule.replace, effectsSet, processedEffects);
+          }
+        }
+      }
+    }
+
+    // Add substance effects AFTER applying rules
+    if (effectsSet.size() < MAX_EFFECTS && substance.effect) {
       for (const effect of substance.effect) {
         if (!effectsSet.has(effect)) {
           effectsSet.add(effect);
@@ -43,9 +76,8 @@ export function mixSubstances(product: ProductType, substanceCodes: SubstanceCod
 
   const finalEffects = effectsSet.toArray().slice(0, MAX_EFFECTS);
   const effectValue = calculateEffectValue(finalEffects);
-  const productPrice = productInfo.price;
-  const sellPrice = Math.round(productPrice * (1 + effectValue));
-  const profit = sellPrice - totalCost - productPrice;
+  const sellPrice = Math.round(productInfo.price * (1 + effectValue));
+  const profit = sellPrice - totalCost;
   const profitMargin = Math.round((profit / sellPrice) * 100) / 100;
 
   return {
@@ -55,51 +87,6 @@ export function mixSubstances(product: ProductType, substanceCodes: SubstanceCod
     profit,
     profitMargin,
   };
-}
-
-/**
- * Apply the rules for a substance to the current effect set
- */
-function applySubstanceRules(
-  substanceCode: SubstanceCode,
-  effectsSet: EffectSet,
-  processedEffects: EffectSet,
-  removedEffects: EffectSet
-): void {
-  const rules = effectRulesBySubstance[substanceCode];
-  if (!rules || rules.length === 0) return;
-
-  const initialEffects = effectsSet.clone();
-  const appliedRules = new Set<number>();
-
-  // Phase 1: Apply rules where conditions are met in the initial state
-  for (let i = 0; i < rules.length; i++) {
-    const rule = rules[i];
-
-    if (checkRulePreconditions(rule, initialEffects)) {
-      applyReplaceEffects(
-        rule.replace,
-        initialEffects,
-        effectsSet,
-        processedEffects,
-        removedEffects
-      );
-      appliedRules.add(i);
-    }
-  }
-
-  // Phase 2: Apply rules where conditions are met after phase 1
-  for (let i = 0; i < rules.length; i++) {
-    if (appliedRules.has(i)) continue;
-
-    const rule = rules[i];
-
-    if (meetsPhaseTwo(rule, initialEffects, effectsSet, removedEffects)) {
-      if (canApplyTransformation(rule.replace, effectsSet)) {
-        applyTransformations(rule.replace, effectsSet, processedEffects);
-      }
-    }
-  }
 }
 
 /**
@@ -157,19 +144,6 @@ function meetsPhaseTwo(
 }
 
 /**
- * Check if a transformation can be applied
- */
-function canApplyTransformation(
-  replace: Partial<Record<EffectCode, EffectCode>>,
-  effectsSet: EffectSet
-): boolean {
-  for (const oldEffect of Object.keys(replace) as EffectCode[]) {
-    if (effectsSet.has(oldEffect)) return true;
-  }
-  return false;
-}
-
-/**
  * Apply effect replacements
  */
 function applyReplaceEffects(
@@ -187,6 +161,19 @@ function applyReplaceEffects(
       removedEffects.add(oldEffect);
     }
   }
+}
+
+/**
+ * Check if a transformation can be applied
+ */
+function canApplyTransformation(
+  replace: Partial<Record<EffectCode, EffectCode>>,
+  effectsSet: EffectSet
+): boolean {
+  for (const oldEffect of Object.keys(replace) as EffectCode[]) {
+    if (effectsSet.has(oldEffect)) return true;
+  }
+  return false;
 }
 
 /**

@@ -7,8 +7,8 @@ describe('mixSubstances', () => {
     expect(result.effects).toContain('En');
     expect(result.cost).toBe(2);
     expect(result.sellPrice).toBe(46);
-    expect(result.profit).toBe(9);
-    expect(result.profitMargin).toBeCloseTo(0.2, 2);
+    expect(result.profit).toBe(44);
+    expect(result.profitMargin).toBeCloseTo(0.96, 2);
   });
 
   test('should apply transformation rules correctly', () => {
