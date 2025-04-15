@@ -17,11 +17,29 @@ const result = mixSubstances('OG Kush', ['Cuke', 'Flu Medicine', 'Gasoline']);
 
 /*
 {
-  effects: [ 'Be', 'Eu', 'Se', 'To' ],
+  effects: [ 'Be', 'Se', 'Eu', 'To' ],
   cost: 12,
   sellPrice: 64,
-  profit: 17,
-  profitMargin: 0.27
+  profit: 52,
+  profitMargin: 0.81,
+  addiction: 0.44
+}
+*/
+```
+
+### Calculate a mix using a hash
+
+```typescript
+const result = mixFromHash('T0cgS3VzaDpBQkM');
+
+/*
+{
+  effects: [ 'Be', 'Se', 'Eu', 'To' ],
+  cost: 12,
+  sellPrice: 64,
+  profit: 52,
+  profitMargin: 0.81,
+  addiction: 0.44
 }
 */
 ```

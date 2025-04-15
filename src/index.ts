@@ -1,5 +1,5 @@
 // Main exports
-export { mixSubstances } from './core/mixer';
+export { mixSubstances, mixFromHash } from './core/mixer';
 export { encodeMixState, decodeMixState } from './utils/encoding';
 
 // Data exports
@@ -11,8 +11,8 @@ export { effectRulesBySubstance } from './data/rules';
 // Type exports
 export type {
   EffectCode,
-  SubstanceCode,
-  ProductType,
+  Substance,
+  Product,
   RankCode,
   EffectData,
   SubstanceData,

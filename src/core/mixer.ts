@@ -1,17 +1,21 @@
-import type { EffectCode, EffectRule, MixResult, ProductType, SubstanceCode } from '../types';
+import type { EffectCode, EffectRule, MixResult, Product, Substance } from '../types';
 
 import { effects } from '../data/effects';
 import { products } from '../data/products';
 import { effectRulesBySubstance } from '../data/rules';
 import { substances } from '../data/substances';
+import { decodeMixState } from '../utils/encoding';
 import { EffectSet } from './effectSet';
 
 const MAX_EFFECTS = 8;
 
 /**
  * Calculate the result of mixing substances with a product
+ * @param product - The product to mix
+ * @param substanceCodes - The substances to mix
+ * @returns The result of the mix
  */
-export function mixSubstances(product: ProductType, substanceCodes: SubstanceCode[]): MixResult {
+export function mixSubstances(product: Product, substanceCodes: Substance[]): MixResult {
   if (!products[product]) {
     throw new Error(`Unknown product: ${product}`);
   }
@@ -76,6 +80,8 @@ export function mixSubstances(product: ProductType, substanceCodes: SubstanceCod
 
   const finalEffects = effectsSet.toArray().slice(0, MAX_EFFECTS);
   const effectValue = calculateEffectValue(finalEffects);
+  const addictionValue = calculateAddiction(finalEffects);
+  const addiction = Math.round(addictionValue * 100) / 100;
   const sellPrice = Math.round(productInfo.price * (1 + effectValue));
   const profit = sellPrice - totalCost;
   const profitMargin = Math.round((profit / sellPrice) * 100) / 100;
@@ -86,11 +92,28 @@ export function mixSubstances(product: ProductType, substanceCodes: SubstanceCod
     sellPrice,
     profit,
     profitMargin,
+    addiction,
   };
 }
 
 /**
+ * Mix substances from a hash
+ * @param hash - The hash to mix
+ * @returns The result of the mix
+ */
+export function mixFromHash(hash: string): MixResult {
+  const state = decodeMixState(hash);
+  if (!state) {
+    throw new Error(`Invalid hash: ${hash}`);
+  }
+  return mixSubstances(state.product, state.substances);
+}
+
+/**
  * Check if a rule's preconditions are met
+ * @param rule - The rule to check
+ * @param initialEffects - The initial effects
+ * @returns True if the preconditions are met, false otherwise
  */
 function checkRulePreconditions(rule: EffectRule, initialEffects: EffectSet): boolean {
   // Check if all required effects are present
@@ -113,6 +136,11 @@ function checkRulePreconditions(rule: EffectRule, initialEffects: EffectSet): bo
 
 /**
  * Check if a rule meets phase two conditions
+ * @param rule - The rule to check
+ * @param initialEffects - The initial effects
+ * @param currentEffects - The current effects
+ * @param removedEffects - The removed effects
+ * @returns True if the rule meets the conditions, false otherwise
  */
 function meetsPhaseTwo(
   rule: EffectRule,
@@ -145,6 +173,11 @@ function meetsPhaseTwo(
 
 /**
  * Apply effect replacements
+ * @param replace - The replacements to apply
+ * @param initialEffects - The initial effects
+ * @param effectsSet - The effects set
+ * @param processedEffects - The processed effects
+ * @param removedEffects - The removed effects
  */
 function applyReplaceEffects(
   replace: Partial<Record<EffectCode, EffectCode>>,
@@ -165,6 +198,9 @@ function applyReplaceEffects(
 
 /**
  * Check if a transformation can be applied
+ * @param replace - The replacements to apply
+ * @param effectsSet - The effects set
+ * @returns True if the transformation can be applied, false otherwise
  */
 function canApplyTransformation(
   replace: Partial<Record<EffectCode, EffectCode>>,
@@ -178,6 +214,9 @@ function canApplyTransformation(
 
 /**
  * Apply transformations to effects
+ * @param replace - The replacements to apply
+ * @param effectsSet - The effects set
+ * @param processedEffects - The processed effects
  */
 function applyTransformations(
   replace: Partial<Record<EffectCode, EffectCode>>,
@@ -195,11 +234,26 @@ function applyTransformations(
 
 /**
  * Calculate the total value multiplier from effects
+ * @param effectCodes - The effects to calculate the value for
+ * @returns The total value multiplier
  */
 function calculateEffectValue(effectCodes: EffectCode[]): number {
   let value = 0;
   for (const code of effectCodes) {
     value += effects[code]?.price || 0;
+  }
+  return value;
+}
+
+/**
+ * Calculate the total addiction value from effects
+ * @param effectCodes - The effects to calculate the value for
+ * @returns The total addiction value
+ */
+function calculateAddiction(effectCodes: EffectCode[]): number {
+  let value = 0;
+  for (const code of effectCodes) {
+    value += effects[code]?.addiction || 0;
   }
   return value;
 }
