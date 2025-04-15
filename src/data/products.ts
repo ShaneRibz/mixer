@@ -1,6 +1,6 @@
-import type { ProductData, ProductType } from '../types';
+import type { Product, ProductData } from '../types';
 
-export const products: Record<ProductType, ProductData> = {
+export const products: Record<Product, ProductData> = {
   'OG Kush': {
     price: 35,
     effects: ['Ca'],
@@ -33,10 +33,10 @@ export const products: Record<ProductType, ProductData> = {
   },
 };
 
-export const productAbbreviations: Record<string, ProductType> = Object.entries(products).reduce(
+export const productAbbreviations: Record<string, Product> = Object.entries(products).reduce(
   (acc, [product, data]) => {
-    acc[data.abbreviation] = product as ProductType;
+    acc[data.abbreviation] = product as Product;
     return acc;
   },
-  {} as Record<string, ProductType>
+  {} as Record<string, Product>
 );

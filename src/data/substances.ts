@@ -1,6 +1,6 @@
-import type { SubstanceCode, SubstanceData } from '../types';
+import type { Substance, SubstanceData } from '../types';
 
-export const substances: Record<SubstanceCode, SubstanceData> = {
+export const substances: Record<Substance, SubstanceData> = {
   Cuke: {
     abbreviation: 'A',
     rank: '1',
@@ -99,12 +99,10 @@ export const substances: Record<SubstanceCode, SubstanceData> = {
   },
 };
 
-export const substanceAbbreviations: Record<string, SubstanceCode> = Object.entries(
-  substances
-).reduce(
+export const substanceAbbreviations: Record<string, Substance> = Object.entries(substances).reduce(
   (acc, [substance, data]) => {
-    acc[data.abbreviation] = substance as SubstanceCode;
+    acc[data.abbreviation] = substance as Substance;
     return acc;
   },
-  {} as Record<string, SubstanceCode>
+  {} as Record<string, Substance>
 );

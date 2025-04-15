@@ -1,6 +1,6 @@
-import type { EffectRule, SubstanceCode } from '../types';
+import type { EffectRule, Substance } from '../types';
 
-export const effectRulesBySubstance: Record<SubstanceCode, EffectRule[]> = {
+export const effectRulesBySubstance: Record<Substance, EffectRule[]> = {
   Cuke: [
     { ifPresent: ['Eu'], ifNotPresent: ['La'], replace: { Eu: 'La' } },
     { ifPresent: ['Fo'], ifNotPresent: ['Cy'], replace: { Fo: 'Cy' } },

@@ -34,7 +34,7 @@ export type EffectCode =
   | 'Tt'
   | 'Zo';
 
-export type SubstanceCode =
+export type Substance =
   | 'Cuke'
   | 'Flu Medicine'
   | 'Gasoline'
@@ -52,7 +52,7 @@ export type SubstanceCode =
   | 'Addy'
   | 'Battery';
 
-export type ProductType =
+export type Product =
   | 'OG Kush'
   | 'Sour Diesel'
   | 'Green Crack'
@@ -77,8 +77,11 @@ export type RankCode =
 
 export interface EffectData {
   name: string;
+  description: string;
+  tier: number;
   price: number;
   color: string;
+  addiction: number;
 }
 
 export interface SubstanceData {
@@ -106,9 +109,10 @@ export interface MixResult {
   sellPrice: number;
   profit: number;
   profitMargin: number;
+  addiction: number;
 }
 
 export interface MixState {
-  product: ProductType;
-  substances: SubstanceCode[];
+  product: Product;
+  substances: Substance[];
 }
