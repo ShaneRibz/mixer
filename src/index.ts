@@ -1,6 +1,6 @@
 // Main exports
 export { mixSubstances, mixFromHash } from './core/mixer';
-export { encodeMixState, decodeMixState } from './utils/encoding';
+export { encodeMixState, decodeMixState, migrateMixHash } from './utils/encoding';
 
 // Data exports
 export { effects } from './data/effects';

@@ -81,6 +81,49 @@ export function decodeMixState(hash: string): MixState | null {
 }
 
 /**
+ * Migrates an old format mix hash to the new format
+ * @param legacyHash - The old format hash to migrate
+ * @returns The mix state in the new hash format, or null if migration failed
+ */
+export async function migrateMixHash(legacyHash: string): Promise<string | null> {
+  try {
+    const LZString = await import('lz-string');
+    const jsonStr = LZString.decompressFromBase64(legacyHash);
+    if (!jsonStr) return null;
+
+    const mixArr = JSON.parse(jsonStr);
+    if (!Array.isArray(mixArr) || !mixArr.length) return null;
+
+    const firstMix = mixArr[0];
+    const productId = firstMix.weed as Product;
+    if (!products[productId]) return null;
+
+    const subsByAbbr = Object.entries(substances).reduce(
+      (map, [id, sub]) => {
+        if (sub.abbreviation) map[sub.abbreviation] = id as Substance;
+        return map;
+      },
+      {} as Record<string, Substance>
+    );
+
+    const substanceIds: Substance[] = [];
+    if (Array.isArray(firstMix.substances)) {
+      for (const legacySubId of firstMix.substances) {
+        const substanceId = substances[legacySubId as Substance]
+          ? (legacySubId as Substance)
+          : subsByAbbr[legacySubId];
+
+        if (substanceId) substanceIds.push(substanceId);
+      }
+    }
+
+    return encodeMixState({ product: productId, substances: substanceIds });
+  } catch {
+    return null;
+  }
+}
+
+/**
  * Convert a string to a URL-safe base64 string
  * @param str - The string to convert
  * @returns The URL-safe base64 string
