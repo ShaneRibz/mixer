@@ -86,7 +86,6 @@ export const effectRulesBySubstance: Record<Substance, EffectRule[]> = {
     { ifPresent: ['Mu'], ifNotPresent: ['To'], replace: { Mu: 'To' } },
     { ifPresent: ['Sh'], ifNotPresent: ['Re'], replace: { Sh: 'Re' } },
     { ifPresent: ['Sn'], ifNotPresent: ['Be'], replace: { Sn: 'Be' } },
-    { ifPresent: ['Tp'], ifNotPresent: ['Fc'], replace: { Tp: 'Fc' } },
   ],
   Iodine: [
     { ifPresent: ['Ca'], ifNotPresent: ['Ba'], replace: { Ca: 'Ba' } },
